@@ -210,5 +210,8 @@ __marimo__/
 # Database
 *.db
 
-# Ignored Utility Files
+# Ignore custom folders
 ignored_utils/
+
+# Ignore logging
+logs/

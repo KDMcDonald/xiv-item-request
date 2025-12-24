@@ -1,0 +1,8 @@
+[project]
+name = "bot"
+version = "0.1.0"
+description = "A bot to allow the request of items from crafters in mmos."
+
+[build-system]
+build-backend = "flit_core.buildapi"
+requires = ["flit_core >= 3.12"]

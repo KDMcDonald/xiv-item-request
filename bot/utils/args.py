@@ -17,7 +17,7 @@ def get_args() -> argparse.Namespace:
     parser.add_argument('-ll', '--logginglevel', help='The level of logging desired.', required=True)
 
     # Testing related arguments
-    parser.add_argument('-tg', '--testguild', help='The discord guild id for the test server.', required=True)
+    parser.add_argument('-tg', '--testguild', type=int, help='The discord guild id for the test server.', required=True)
 
     args = parser.parse_args()
     return args

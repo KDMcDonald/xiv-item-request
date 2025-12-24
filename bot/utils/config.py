@@ -1,6 +1,8 @@
 import keyring as kr
 
 
+guild_id : list = []
+
 def get_token(service_name : str, username : str) -> str | None:
     '''
     Gets the token from the system's key storage system.
@@ -13,3 +15,6 @@ def get_token(service_name : str, username : str) -> str | None:
         (str | None) : If the service has a token by the name, it will return the token. Otherwise returns None.
     '''
     return kr.get_password(service_name=service_name, username=username)
+
+def assign_guild_id(id : int) -> None:
+    guild_id.append(id)

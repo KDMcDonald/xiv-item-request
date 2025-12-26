@@ -20,6 +20,7 @@ class XIVRequestBot(commands.Bot):
             intents : nextcord.Intents = nextcord.Intents.default()):
         self.config_token = config_token
         self.logger = logger
+        self.db_connection = db_connection
         super().__init__(
             intents=intents
         )

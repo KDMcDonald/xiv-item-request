@@ -1,6 +1,7 @@
 # Standard Libraries
 import os
 import logging
+import sqlite3
 
 # 3rd Party Libraries
 import nextcord
@@ -11,9 +12,15 @@ from utils import args, config, log
 
 
 class XIVRequestBot(commands.Bot):
-    def __init__(self, config_token : str, logger : logging.Logger, intents : nextcord.Intents = nextcord.Intents.default()):
+    def __init__(
+            self,
+            config_token : str,
+            db_connection : sqlite3.Connection,
+            logger : logging.Logger,
+            intents : nextcord.Intents = nextcord.Intents.default()):
         self.config_token = config_token
         self.logger = logger
+        self.db_connection = db_connection
         super().__init__(
             intents=intents
         )
@@ -45,12 +52,24 @@ def main():
         logger.error('No token found.')
         exit()
     token = str(token)
+    logger.info('Retrieved token successfully!')
 
     # Declare intents (if changed)
     intents = nextcord.Intents.default()
+    
+    # Setup database connection
+    try:
+        logger.info(f'Connecting to database...')
+        connection = sqlite3.connect(arguments.database)
+        temp_cursor = connection.cursor()
+        temp_cursor.close()
+        logger.info(f'Connection successful!')
+    except Exception as e:
+        logger.error(f'Connection to database failed: {e}')
+        exit()
 
     # Setup bot
-    bot = XIVRequestBot(config_token=token, logger=logger)
+    bot = XIVRequestBot(config_token=token, db_connection=connection, logger=logger)
     
     # Setup test guild (if dev)
     # TODO: Check if environment is development or prod

@@ -15,6 +15,7 @@ class Requests(commands.Cog):
     async def on_ready(self) -> None:
         self.bot.logger.info(f'{self.__class__.__name__} has loaded successfully.')
 
+    #TODO: Please for the love of god make a request command!!!!!!!!!
 
 def setup(bot : XIVRequestBot) -> None:
     bot.add_cog(Requests(bot=bot))
